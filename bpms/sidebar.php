@@ -1,0 +1,132 @@
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <div class="dropdown">
+   	<a href="./" class="brand-link">
+        <?php if($_SESSION['login_type'] == 1): ?>
+        <h3 class="text-center p-0 m-0"><b>ADMIN</b></h3>
+        <?php else: ?>
+        <h3 class="text-center p-0 m-0"><b>USER</b></h3>
+        <?php endif; ?>
+
+    </a>
+      
+    </div>
+    <div class="sidebar pb-4 mb-4">
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+                <a href="../index.php" class="nav-link nav-back_to_web">
+                  <i class="fas fa-tasks nav-icon"></i>
+                  <p>Back To website</p>
+                </a>
+          </li>  
+        <li class="nav-item dropdown">
+            <a href="./" class="nav-link nav-home">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>  
+     
+          <?php if($_SESSION['login_type'] == 1): ?>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_user">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Event
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=add_event" class="nav-link nav-add_event tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add New</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=event_list" class="nav-link nav-event_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Event List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <?php endif; ?>
+          <li class="nav-item">
+                <a href="./index.php?page=registerd" class="nav-link nav-registerd">
+                  <i class="fas fa-tasks nav-icon"></i>
+                  <p>Registered client</p>
+                </a>
+          </li>
+          <?php if($_SESSION['login_type'] != 3): ?>
+           <li class="nav-item">
+                <a href="./index.php?page=reports" class="nav-link nav-reports">
+                  <i class="fas fa-th-list nav-icon"></i>
+                  <p>confirmation</p>
+                </a>
+          </li>
+          <?php endif; ?>
+
+          
+          <?php if($_SESSION['login_type'] == 1): ?>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_user">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+              customer service
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=add_hotel" class="nav-link nav-add_hotel tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add Hotel</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=hotel_list" class="nav-link nav-hotel_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Hotel list</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=add_transport" class="nav-link nav-add_transport tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Add Transport </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=transport_list" class="nav-link nav-transport_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Transport List</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <?php endif; ?>
+        
+        
+    </div>
+  </aside>
+  <script>
+  	$(document).ready(function(){
+      var page = '<?php echo isset($_GET['page']) ? $_GET['page'] : 'home' ?>';
+  		var s = '<?php echo isset($_GET['s']) ? $_GET['s'] : '' ?>';
+      if(s!='')
+        page = page+'_'+s;
+  		if($('.nav-link.nav-'+page).length > 0){
+             $('.nav-link.nav-'+page).addClass('active')
+  			if($('.nav-link.nav-'+page).hasClass('tree-item') == true){
+            $('.nav-link.nav-'+page).closest('.nav-treeview').siblings('a').addClass('active')
+  				$('.nav-link.nav-'+page).closest('.nav-treeview').parent().addClass('menu-open')
+  			}
+        if($('.nav-link.nav-'+page).hasClass('nav-is-tree') == true){
+          $('.nav-link.nav-'+page).parent().addClass('menu-open')
+        }
+
+  		}
+     
+  	})
+  </script>
